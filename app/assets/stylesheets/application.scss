@@ -50,3 +50,8 @@ body {
   height: 290px;
   text-align: left;
 }
+
+.field_with_errors {
+	border-style: solid;
+	border-color: red;
+}
