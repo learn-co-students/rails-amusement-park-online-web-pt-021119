@@ -2,16 +2,14 @@ class User < ActiveRecord::Base
   has_many :rides
   has_many :attractions, through: :rides
 
-  validates :name, presence: true, uniqueness: true
-  validates :nausea, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 1 }
-  validates :happiness, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 1 }
-  validates :tickets, presence: true, numericality: { only_integer: true }
   has_secure_password
 
   def mood
-    if :nausea > :happiness
+    if self.nausea.nil? || self.happiness.nil?
+      nil
+    elsif self.nausea > self.happiness
       "sad"
-    elsif :happiness > :nausea
+    elsif self.happiness > self.nausea
       "happy"
     else
       "content"
@@ -19,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    :admin
+    self.admin
   end
 
 end

@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :attractions
   resources :rides
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  post '/logout', to: 'sessions#destroy'
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
 
   root 'welcome#home'
 end

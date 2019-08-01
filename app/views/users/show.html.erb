@@ -1,4 +1,4 @@
-<p><%= @comment if !@ride.nil? %></p>
+<%= notice %>
 
 <% if @user.is_admin? %>
   <h4>ADMIN</h4>
@@ -8,8 +8,7 @@
 <p>Tickets: <%= @user.tickets %></p>
 <p>Mood: <%= @user.mood %></p>
 <p>Height: <%= @user.height %></p>
+
 <%= link_to "See attractions", attractions_path %><br />
 
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
+<%= link_to "Log Out", logout_path %>

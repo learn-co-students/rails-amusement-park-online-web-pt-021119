@@ -1,2 +1,12 @@
-<h1>Attractions#edit</h1>
-<p>Find me in app/views/attractions/edit.html.erb</p>
+<%= form_for @attraction, controller: 'attractions', action: 'update' do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Update Attraction", class: 'btn btn-primary' %>
+  </div>
+  
+<% end %>

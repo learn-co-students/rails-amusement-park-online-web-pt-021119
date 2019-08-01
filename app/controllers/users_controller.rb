@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :require_logged_in, only: [:new, :create]
+  before_action :require_logged_in, only: [:show]
 
   def show
     @user = current_user
-    @ride = @user.rides.last
-    @comment = @ride.take_ride
   end
 
   def new
@@ -12,19 +10,24 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to @user
+    if params[:admin]
+      @user = User.create(admin_params)
     else
-      render :new
+      @user = User.create(user_params)
     end
+    return redirect_to controller: 'users', action: 'new' unless @user.save
+    session[:user_id] = @user.id
+    redirect_to user_path(@user)
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :height, :happiness, :nausea, :tickets, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :height, :happiness, :nausea, :tickets, :admin, :password)
+  end
+
+  def admin_params
+    params.require(:user).permit(:name, :password, :admin)
   end
 
 end
