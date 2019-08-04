@@ -1,0 +1,13 @@
+<div class="center">
+	<div class="info">
+		<p><strong>Name:</strong> <%= @user.name %></p>
+		<% if @user.admin %>
+			<p><strong>ADMIN</strong>
+		<% else %>
+			<p><strong>Tickets:</strong> <%= @user.tickets %></p>
+			<p><strong>Mood:</strong>  <%= @user.mood %></p>
+			<p><strong>Height:</strong> <%= @user.height %></p>
+			<p><a href="/attractions">See attractions</a></p>
+		<% end %>
+	</div>
+</div>
