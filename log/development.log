@@ -1,0 +1,1228 @@
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from load at /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23)
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+Migrating to CreateUser (20190801195824)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "password_digest" varchar, "happiness" integer, "nausea" integer, "height" integer, "tickets" integer)[0m
+  ↳ db/migrate/20190801195824_create_user.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190801195824"]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+Migrating to CreateRide (20190801195949)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "rides" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "attraction_id" integer)[0m
+  ↳ db/migrate/20190801195949_create_ride.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190801195949"]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (20.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+Migrating to CreateAttraction (20190801200045)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "attractions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "min_height" integer, "nausea_rating" integer, "happiness_rating" integer, "tickets" integer)[0m
+  ↳ db/migrate/20190801200045_create_attraction.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190801200045"]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+Migrating to AddAdminToUser (20190801202006)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'[0m
+  ↳ db/migrate/20190801202006_add_admin_to_user.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190801202006"]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-08-01 20:36:00.402335"], ["updated_at", "2019-08-01 20:36:00.402335"]]
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from load at /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/bin/rake:23
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Max Charles"], ["password_digest", "$2a$12$89EoC1OWGGOTcf03ucm1j.Rf/GFBAfCSNONVh3vgQ1L44GyKC9qQe"], ["happiness", 3], ["nausea", 0], ["height", 32], ["tickets", 6]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Skai Jackson"], ["password_digest", "$2a$12$DObzvxhlTuXskS0b5PxfqOT9OHaqU.TsF/uIKDwYZinGaWZni6C3q"], ["happiness", 3], ["nausea", 1], ["height", 60], ["tickets", 10]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Kaleo Elam"], ["password_digest", "$2a$12$IOGdlR17eHnhheNKFrWi5uN8X4YyFp.AJHxXMP38gzHOwFBbvnXPO"], ["happiness", 2], ["nausea", 1], ["height", 59], ["tickets", 15]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Megan Charpentier"], ["password_digest", "$2a$12$WAtMOOzxW.DNvyz.ySFrQ.wbNQ3JlU3WwvBO6PoXwXXbSFAghUcTW"], ["happiness", 1], ["nausea", 3], ["height", 60], ["tickets", 12]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Hayden Byerly"], ["password_digest", "$2a$12$SoUC3Pj5D0z1nozHXm1ZqOHvQ0/4OEln01JiOytQkVFFC9hlIt5fS"], ["happiness", 1], ["nausea", 1], ["height", 58], ["tickets", 16]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Tenzing Norgay Trainor"], ["password_digest", "$2a$12$qE8gdDTKoJpcDcF8CqxHVOo6es5ybbjHnOWtrrW/Kt.5ojhPFicY6"], ["happiness", 1], ["nausea", 0], ["height", 55], ["tickets", 10]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Davis Cleveland"], ["password_digest", "$2a$12$isjq8Evffd4UdsSJ2wj5wupk/Lk1fbDaCJ/G2fPNhwSJQfzfGTrti"], ["happiness", 3], ["nausea", 1], ["height", 36], ["tickets", 5]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Cole Sand"], ["password_digest", "$2a$12$gkKSCS0loozCazwtuNvudeB9GPfGv2qmiL0RT3mHHZNSKsfISqfnS"], ["happiness", 2], ["nausea", 2], ["height", 34], ["tickets", 7]]
+  ↳ db/seeds.rb:55
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Quvenzhané Wallis"], ["password_digest", "$2a$12$UAbS/yikSEyCG7ChS5.nsO2UoaEFmfhwL2CMY1i5wd0mFNmPAJLXS"], ["happiness", 2], ["nausea", 2], ["height", 30], ["tickets", 13]]
+  ↳ db/seeds.rb:55
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:55
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:61
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "admin") VALUES (?, ?, ?)[0m  [["name", "Mary Elitch Long"], ["password_digest", "$2a$12$ZVyHn9eZTZQ4w9GQK72dsu5qFqlOP2w3Ikjp/WT1jC9fWDgsa.9CK"], ["admin", "t"]]
+  ↳ db/seeds.rb:61
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:61
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:61
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "admin") VALUES (?, ?, ?)[0m  [["name", "John Elitch"], ["password_digest", "$2a$12$2vhdmFGoO06Q2/0Umqzzue7BuRILBncrVUfIfXoV1f88oGHjGsnpi"], ["admin", "t"]]
+  ↳ db/seeds.rb:61
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:61
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Scrambler Ride"], ["min_height", 36], ["nausea_rating", 2], ["happiness_rating", 2], ["tickets", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 4], ["attraction_id", 1]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Miniature Railroad"], ["min_height", 32], ["nausea_rating", 0], ["happiness_rating", 1], ["tickets", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 5], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 3], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 7], ["attraction_id", 2]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Merry-Go-Round"], ["min_height", 30], ["nausea_rating", 1], ["happiness_rating", 1], ["tickets", 1]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 3]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 3]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 3]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 4], ["attraction_id", 3]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 7], ["attraction_id", 3]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Roller Coaster"], ["min_height", 54], ["nausea_rating", 1], ["happiness_rating", 3], ["tickets", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.2ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 1], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 4], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 5], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 4]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.4ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Swinging Ship"], ["min_height", 36], ["nausea_rating", 2], ["happiness_rating", 2], ["tickets", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 5], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 3], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 3], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 5]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Go Karts"], ["min_height", 36], ["nausea_rating", 1], ["happiness_rating", 2], ["tickets", 3]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 7], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 6]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.6ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Haunted Mansion"], ["min_height", 30], ["nausea_rating", 1], ["happiness_rating", 1], ["tickets", 1]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 3], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 1], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 5], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.0ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 6], ["attraction_id", 7]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.5ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Ferris Wheel"], ["min_height", 36], ["nausea_rating", 1], ["happiness_rating", 1], ["tickets", 2]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.2ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 7], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 2], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 8], ["attraction_id", 8]]
+  ↳ db/seeds.rb:77
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ db/seeds.rb:73
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:76
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:77
+  [1m[36mAttraction Create (0.3ms)[0m  [1m[32mINSERT INTO "attractions" ("name", "min_height", "nausea_rating", "happiness_rating", "tickets") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Teacups Ride"], ["min_height", 28], ["nausea_rating", 3], ["happiness_rating", 1], ["tickets", 1]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.3ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 9]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 1], ["attraction_id", 9]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 1], ["attraction_id", 9]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 7], ["attraction_id", 9]]
+  ↳ db/seeds.rb:77
+  [1m[36mRide Create (0.1ms)[0m  [1m[32mINSERT INTO "rides" ("user_id", "attraction_id") VALUES (?, ?)[0m  [["user_id", 9], ["attraction_id", 9]]
+  ↳ db/seeds.rb:77
+  [1m[35m (1.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:77
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/gems/activesupport-5.2.3/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/" for ::1 at 2019-08-01 17:49:45 -0500
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (uninitialized constant StaticPagesController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/" for ::1 at 2019-08-01 17:50:55 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 8264ms (Views: 8261.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:52:40 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 100ms (Views: 97.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:52:52 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 71ms (Views: 69.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:54:40 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 163ms (Views: 160.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:54:53 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 122ms (Views: 120.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:55:13 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 52ms (Views: 50.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:55:55 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 121ms (Views: 120.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:56:25 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 51ms (Views: 50.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:56:45 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 57ms (Views: 55.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:56:51 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 84ms (Views: 82.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:58:36 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 216ms (Views: 214.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:58:48 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 59ms (Views: 58.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:59:58 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 167ms (Views: 165.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 17:59:58 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 90ms (Views: 86.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 18:00:20 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 70ms (Views: 67.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 18:00:24 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 49ms (Views: 47.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-01 18:00:39 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (110.6ms)
+Completed 200 OK in 183ms (Views: 155.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-01 18:00:59 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 60ms (Views: 57.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:01:31 -0500
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/users/new" for ::1 at 2019-08-01 18:01:34 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (6.3ms)
+Completed 200 OK in 138ms (Views: 137.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:02:18 -0500
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `block in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:79:in `rescue in load_missing_constant'
+bootsnap (1.4.4) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.3) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.3) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (5.2.3) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/signin" for ::1 at 2019-08-01 18:03:10 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 479ms (Views: 477.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:03:46 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 347ms (Views: 327.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:03:50 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 62ms (Views: 60.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-01 18:04:06 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 58ms (Views: 52.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 18:04:08 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 54ms (Views: 51.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2019-08-01 18:06:35 -0500
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 174ms (Views: 172.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:06:36 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 123ms (Views: 98.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:07:17 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 220ms (Views: 216.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-01 18:07:26 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 60ms (Views: 57.2ms | ActiveRecord: 0.0ms)
+
+
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/gems/activesupport-5.2.3/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/users/new" for ::1 at 2019-08-03 09:53:40 -0700
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/ryanwolfe/.rvm/gems/ruby-2.6.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (125.0ms)
+Completed 200 OK in 1688ms (Views: 1645.6ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/users" for ::1 at 2019-08-03 09:54:39 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LXCzQqf7v+w74n7Gwsp4anVORjIKfcjJK/cTcys5TmZF/BHfyyFupozfs1tIww0LvNWolwYrOMZ4uzcffyUiuA==", "user"=>{"name"=>"Ryan", "height"=>"56", "happiness"=>"3", "nausea"=>"1", "tickets"=>"50", "admin"=>"0", "password"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:15
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Ryan"], ["password_digest", "$2a$12$QNW8ZeaerzPA2/cPXjvWuuMnmkbmdaRpMEUm7895tSsU.Huul2/jG"], ["happiness", 3], ["nausea", 1], ["height", 56], ["tickets", 50]]
+  ↳ app/controllers/users_controller.rb:15
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:15
+No template found for UsersController#create, rendering head :no_content
+Completed 204 No Content in 284ms (ActiveRecord: 4.5ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-03 10:04:30 -0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 187ms (Views: 174.3ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/users" for ::1 at 2019-08-03 10:04:46 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UTPgzRsODXvA3pt5svyoRxJ6EegQUoBdEr04Zh854gZOGtEwz6r1rn5toUR5x90KlX++pSRbzo0GLNWQrXprSg==", "user"=>{"name"=>"Ryan", "height"=>"56", "happiness"=>"3", "nausea"=>"1", "tickets"=>"50", "admin"=>"0", "password"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:16
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Ryan"], ["password_digest", "$2a$12$5hff6KrM/FcxLKVh4k0DF.JaovQTwCkrxEqC6dYnq8FXTfkYrRDDq"], ["happiness", 3], ["nausea", 1], ["height", 56], ["tickets", 50]]
+  ↳ app/controllers/users_controller.rb:16
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:16
+Redirected to http://localhost:3000/users/13
+Completed 302 Found in 260ms (ActiveRecord: 3.1ms)
+
+
+Started GET "/users/13" for ::1 at 2019-08-03 10:04:46 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"13"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:35
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 66ms (Views: 58.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-03 10:04:51 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 49ms (Views: 46.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions/create" for ::1 at 2019-08-03 10:04:57 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CL89NWwVogpYohcZc55PofOOZqUKvC2Y1PmsaKwvGjdIeR9oifAYn/ZQSkDBtuw28icw7Ys6NGWOL3Ac4Fnz2g==", "user"=>{"name"=>"Ryan", "password"=>"[FILTERED]"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Ryan"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9
+Redirected to http://localhost:3000/users/12
+Completed 302 Found in 251ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/users/12" for ::1 at 2019-08-03 10:04:57 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:35
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 87ms (Views: 85.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-03 10:05:06 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 94ms (Views: 89.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-03 10:08:32 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/sessions/new.html.erb:4
+  Rendered sessions/new.html.erb within layouts/application (66.3ms)
+Completed 200 OK in 358ms (Views: 312.1ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-03 15:43:16 -0700
+Processing by UsersController#new as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 480ms (Views: 457.3ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/users" for ::1 at 2019-08-03 15:43:39 -0700
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9DS0+8JE8LVM6cF8kXzvriif9KgBXy2CZate3sMideGcuBZmrp4h//vUDOEbdZrP4QQaDQ0J3Y0253qylz4ZPw==", "user"=>{"name"=>"Ryan2", "height"=>"56", "happiness"=>"4", "nausea"=>"1", "tickets"=>"34", "admin"=>"1", "password"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:15
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "happiness", "nausea", "height", "tickets", "admin") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["name", "Ryan2"], ["password_digest", "$2a$12$6hD4uXZAf6ctbShZ6Dt0outMzKtftSp98jPp7eT1YcnJkXq55.MhG"], ["happiness", 4], ["nausea", 1], ["height", 56], ["tickets", 34], ["admin", "t"]]
+  ↳ app/controllers/users_controller.rb:15
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:15
+Redirected to http://localhost:3000/users/14
+Completed 302 Found in 258ms (ActiveRecord: 2.6ms)
+
+
+Started GET "/users/14" for ::1 at 2019-08-03 15:43:39 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:34
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 52ms (Views: 49.7ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/signout" for ::1 at 2019-08-03 15:43:48 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"QTnRxuPMd+Djn1p/mwLyUbJA0TlYqXhYtCMO+ZoznrteEOA7N2iPNV0sYEJQOYccNUV+dGygNoigsuMPKHAX9w=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+Redirected to http://localhost:3000/
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2019-08-03 15:43:48 -0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 78ms (Views: 76.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/signin" for ::1 at 2019-08-03 15:43:49 -0700
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/sessions/new.html.erb:4
+  Rendered sessions/new.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 73ms (Views: 49.1ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/sessions/create" for ::1 at 2019-08-03 15:43:55 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qdM9Ivy/l2MRApiAgwsaczU9nYJ/IsfIBbuHwh0DKazpFR9/GVot9r/wxdkxI7nkNJTLyv6k3jVfbVu2UXXAQQ==", "user"=>{"name"=>"Ryan", "password"=>"[FILTERED]"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."name" = ? LIMIT ?[0m  [["name", "Ryan"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:9
+Redirected to http://localhost:3000/users/12
+Completed 302 Found in 251ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/12" for ::1 at 2019-08-03 15:43:55 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:34
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 48ms (Views: 46.1ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/signout" for ::1 at 2019-08-03 15:54:21 -0700
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"9LN+yRoylrcWxKY25P4L6qMQxBNBojT6No9hds8B96Drmk80zpZuYqh3nAsvxX6nJBVrXnWreioiHoyAfUJ+7A=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/" for ::1 at 2019-08-03 15:54:21 -0700
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 334ms (Views: 331.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2019-08-03 15:54:23 -0700
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 85ms (Views: 59.4ms | ActiveRecord: 0.0ms)
+
+
