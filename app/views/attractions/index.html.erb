@@ -1,0 +1,23 @@
+<% if flash[:notice].present? %>
+  <p> <%= flash[:notice] %></p>
+<% end %>
+
+<% if current_user.admin? %>
+<%= link_to "New Attraction", new_attraction_path %>
+<hr>
+<% end %>
+
+<h1>All attractions</h1>
+
+<ul>
+  <% @attractions.each do |attraction| %>
+    <li>
+      <label>Name:</label> <%= attraction.name %>
+      <% if current_user.admin? %>
+      <%= link_to "Show #{attraction.name}", attraction_path(attraction) %>
+      <% else %>
+      <label><%= link_to "Go on #{attraction.name}", attraction_path(attraction) %></label><br>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

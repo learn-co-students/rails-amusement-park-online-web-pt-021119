@@ -1,0 +1,11 @@
+<h1>Login</h1>
+
+<%= form_tag(signin_path) do %>
+  <%= label_tag :user_name %>
+  <%= collection_select :user, :name, @users, :id, :name %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <br>
+  <%= submit_tag "Sign In" %>
+<% end %>
