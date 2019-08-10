@@ -1,0 +1,12 @@
+    <%= form_for @user do |f| %>
+        Username: <%= f.text_field :name %>
+        Password: <%= f.password_field :password %>
+        Happiness: <%= f.text_field :happiness %>
+        Nausea: <%= f.text_field :nausea %>
+        Height: <%= f.text_field :height %>
+        Tickets: <%= f.text_field :tickets %>
+        <%= f.label :admin %>
+        <%= f.check_box :admin, id: "user_admin" %></br>
+        <%= f.submit "Create User" %>
+       <% end %>
+       
