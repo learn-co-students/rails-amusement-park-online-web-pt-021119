@@ -8,6 +8,5 @@ class RidesController < ApplicationController
     else
       redirect_to attraction_path(@ride.attraction)
     end
-  end
-
+end
 end
