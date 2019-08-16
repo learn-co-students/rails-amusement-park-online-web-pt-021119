@@ -1,0 +1,16 @@
+<%= content_tag(:p, flash[:alert]) if flash[:alert] %>
+<%= content_tag(:h1, 'ADMIN') if @user.admin %>
+
+<h3><%= @user.name %>'s Info:</h3>
+<ul>
+  <li><label>Mood: </label> <%= @user.mood unless @user.admin %></li>
+  <li><label>Happiness: </label> <%= @user.happiness %></li>
+  <li><label>Nausea: </label> <%= @user.nausea %></li>
+  <li><label>Height: </label> <%= @user.height %></li>
+  <li><label>Tickets: </label> <%= @user.tickets %></li>
+  <li><label>Admin?: </label> <%= @user.admin? %></li>
+</ul>
+
+<hr>
+
+<%= link_to "See attractions", attractions_path %>
