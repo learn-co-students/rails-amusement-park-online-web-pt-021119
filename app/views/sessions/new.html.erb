@@ -1,0 +1,16 @@
+<%= form_for :user do |f| %>
+  <div class="form-group">
+    <%= f.label :name, value= "Your name:"%>
+    <%= f.collection_select(:id, User.all, :id, :name, {prompt: "Please select your name from this dropdown"}, id: "user_name") %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, value= "Your password:" %>
+    <%= f.password_field :password, placeholder: "Hope you didn't forget...", class: "form-control"  %>
+  </div>
+
+  <div class="actions">
+  <%= f.submit "Sign In", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
